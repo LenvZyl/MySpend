@@ -12,6 +12,9 @@ import SwiftUI
 class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    @Published var emailSignUp = ""
+    @Published var passwordSignUp = ""
+    @Published var passwordConfrimSignUp = ""
     @Published var isLoading = false
     @Published var isSignUp = false
     
@@ -56,6 +59,15 @@ class LoginViewModel: ObservableObject {
     
     func resetPassword(){
         
+    }
+    
+    func signUp(){
+        if(emailSignUp.isEmpty || passwordSignUp.isEmpty || passwordConfrimSignUp.isEmpty){
+            self.setAlert(message: "Please enter a valid email and password")
+        }
+        if(passwordSignUp != passwordConfrimSignUp){
+            self.setAlert(message: "Passwords do not match")
+        }
     }
     
     func signOut(){

@@ -15,9 +15,9 @@ struct LoginView: View {
                 Spacer(minLength: 0)
                 ZStack{
                     if UIScreen.main.bounds.height < 750 {
-                        Image(systemName: "person").resizable().frame(width: 100, height: 100)
+                        Image("wallet").resizable().frame(width: 100, height: 100)
                     } else {
-                        Image(systemName: "logo").resizable().frame(width: 100, height: 100)
+                        Image("wallet").resizable().frame(width: 100, height: 100)
                     }
                 }
                 .padding(.horizontal)
@@ -30,9 +30,6 @@ struct LoginView: View {
                         Text("My Spending")
                             .font(.system(size: 30, weight: .heavy))
                             .foregroundColor(.white)
-                        Text("Tracker")
-                            .font(.system(size: 30, weight: .heavy))
-                            .foregroundColor(.white)
                     }
                     Text("Keep track of your spending")
                         .font(.system(size: 12))
@@ -40,8 +37,8 @@ struct LoginView: View {
                 }
                 .padding(.top)
                 VStack(spacing: 20){
-                    LoginTextField(text: $loginViewModel.email, image: "person", placeHolder: "Email", isSecure: false)
-                    LoginTextField(text: $loginViewModel.password, image: "lock", placeHolder: "Password", isSecure: true)
+                    AuthTextField(text: $loginViewModel.email, image: "person", placeHolder: "Email", isSecure: false)
+                    AuthTextField(text: $loginViewModel.password, image: "lock", placeHolder: "Password", isSecure: true)
                 }
                 .padding(.top)
                 Button(action: loginViewModel.login){
@@ -69,19 +66,17 @@ struct LoginView: View {
                             .foregroundColor(.white)
                     }
                 }.padding(.top, 20)
-                
             }
             if(loginViewModel.isLoading){
                 LoadingView()
             }
         }
-
         .background(LinearGradient(
                                 gradient: Gradient(colors: [Color.white, Color.blue]),
-                                   startPoint: .top,
-                                   endPoint: .bottom).ignoresSafeArea(.all, edges: .all))
+                                startPoint: .top,
+                                endPoint: .bottom).ignoresSafeArea(.all, edges: .all))
         .fullScreenCover(isPresented: $loginViewModel.isSignUp){
-            SignUpView()
+            SignUpView(loginViewModel: loginViewModel)
         }
         .alert(isPresented: $loginViewModel.alert, content: {
             Alert(title: Text("Alert"),
@@ -89,44 +84,6 @@ struct LoginView: View {
                   dismissButton: .destructive(Text("Ok")))
         })
     }
-}
-
-struct LoginTextField: View {
-    
-    @Binding var text: String
-    var image: String
-    var placeHolder: String
-    var isSecure: Bool
-    
-    var body: some View {
-         ZStack(alignment: Alignment(horizontal: .leading, vertical: .center), content: {
-            Image(systemName: image)
-                .font(.system(size: 24))
-                .foregroundColor(.accentColor)
-                .frame(width: 60, height: 60)
-                .background(Color.white)
-                .clipShape(Circle())
-            if isSecure {
-                SecureField(placeHolder, text: $text)
-                .padding(.horizontal)
-                .padding(.leading, 65)
-                .frame(height: 60)
-                .background(Color.white.opacity(0.2))
-                .clipShape(Capsule())
-                .autocapitalization(.none)
-            }else{
-                TextField(placeHolder, text: $text)
-                .padding(.horizontal)
-                .padding(.leading, 65)
-                .frame(height: 60)
-                .background(Color.white.opacity(0.2))
-                .clipShape(Capsule())
-                .autocapitalization(.none)
-            }
-         }).padding(.horizontal)
-    }
-    
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
