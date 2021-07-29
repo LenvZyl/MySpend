@@ -15,8 +15,7 @@ struct MainTabView: View {
         
         TabView(selection: $selection) {
             NavigationView {
-                Text("")
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                HomeView()
                     .navigationTitle("Home")
             }
             .tabItem {
