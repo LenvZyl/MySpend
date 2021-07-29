@@ -58,7 +58,6 @@ struct LoginView: View {
                     }
                 }.padding(.top, 20)
                 Spacer(minLength: 0)
-                
                 HStack(spacing: 10){
                     Button(action: loginViewModel.resetPassword) {
                         Text("Forgot Password")
