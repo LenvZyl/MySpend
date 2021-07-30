@@ -106,10 +106,8 @@ class LoginViewModel: ObservableObject {
     func signOut(){
         do{
             try Auth.auth().signOut()
-            self.isLoggedIn = false
-            resetData()
-        }catch {
-            
-        }
+        }catch {}
+        self.isLoggedIn = false
+        resetData()
     }
 }

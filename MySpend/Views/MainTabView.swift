@@ -15,12 +15,12 @@ struct MainTabView: View {
         
         TabView(selection: $selection) {
             NavigationView {
-                HomeView()
-                    .navigationTitle("Home")
+                SpendView()
+                    .navigationTitle("Spend")
             }
             .tabItem {
                 Image(systemName: "house.fill")
-                Text("Home")
+                Text("Spend")
             }.tag(0)
             NavigationView {
                 Text("")
