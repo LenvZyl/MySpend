@@ -15,7 +15,7 @@ class SpendViewModel: ObservableObject {
     
     @Published var purchaseName = ""
     @Published var purchaseAmount = ""
-    @Published var purchaseDetail = ""
+    @Published var purchaseDate = Date()
     
     @Published var purchases: [Purchase] = [
         Purchase(name: "Food", amount: 20.00, date: "", id: "1"),
@@ -28,14 +28,19 @@ class SpendViewModel: ObservableObject {
         isAddingPurchase.toggle()
     }
     func addItem(){
-        purchases.append(Purchase(name: purchaseName, amount: Double(purchaseAmount) ?? 0.0, date: purchaseDetail, id: "1"))
+        let id = UUID().uuidString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY, MMM d, HH:mm:ss"
+        let dateString = dateFormatter.string(from: purchaseDate)
+        purchases.append(Purchase(name: purchaseName, amount: Double(purchaseAmount) ?? 0.0, date: dateString, id: id))
         clearData()
         isAddingPurchase.toggle()
     }
+    
     func clearData(){
         purchaseName = ""
         purchaseAmount = ""
-        purchaseDetail = ""
+        purchaseDate = Date()
     }
 }
 

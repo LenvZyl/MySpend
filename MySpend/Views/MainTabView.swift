@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct MainTabView: View {
     @State private var selection = 0
     @StateObject var loginViewModel: LoginViewModel
     
     var body: some View {
-        
         TabView(selection: $selection) {
             NavigationView {
                 SpendView()
@@ -23,9 +23,7 @@ struct MainTabView: View {
                 Text("Spend")
             }.tag(0)
             NavigationView {
-                Text("")
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .navigationTitle("Profile")
+                ProfileView().navigationTitle("Profile")
                     .toolbar {
                         Button("Log out") {
                             loginViewModel.signOut()

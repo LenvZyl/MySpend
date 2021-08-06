@@ -28,13 +28,10 @@ struct AddPurchaseView: View {
                         .clipShape(Capsule())
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    TextField("Detail", text: $spendViewModel.purchaseDetail)
-                        .padding(.horizontal)
-                        .frame(height: 60)
-                        .background(Color.white.opacity(1))
-                        .clipShape(Capsule())
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
+                    DatePicker(selection: $spendViewModel.purchaseDate, label: {
+                        Text("Date:")
+                    }).padding(.all, 10)
+
                 }
                 .padding(.all)
                 .background(Color.blue.opacity(0.2))

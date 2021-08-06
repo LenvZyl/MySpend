@@ -13,13 +13,7 @@ struct SpendView: View {
         VStack{
             ScrollView(.vertical) {
                 ForEach(spendViewModel.purchases, id: \.self){ purchase in
-                    HStack{
-                        Text(purchase.name)
-                        Spacer()
-                        Text(String(format: "%.2f", purchase.amount))
-                    }.frame(height: 50)
-                    .cornerRadius(30)
-                    .padding(.all, 10)
+                    PurchaseItemView(purchase: purchase)
                 }
             }
             Spacer()
